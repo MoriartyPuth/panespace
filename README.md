@@ -20,9 +20,11 @@ Switching always targets the monitor your **pointer** is on.
 
 | Shortcut | Action |
 |----------|--------|
-| `Super+Ctrl+1..4` | Jump active monitor to workspace 1–4 |
+| `Super+Alt+1..4` | Jump active monitor to workspace 1–4 |
 | `Super+Ctrl+Right` | Next workspace on active monitor |
 | `Super+Ctrl+Left` | Previous workspace on active monitor |
+
+(`Super+Ctrl+1..9` is avoided — GNOME binds it to "open new window of app N".)
 
 Count of virtual workspaces is configurable in preferences (2–9).
 
