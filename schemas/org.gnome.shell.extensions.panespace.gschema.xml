@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.panespace"
+          path="/org/gnome/shell/extensions/panespace/">
+
+    <key name="num-virtual" type="i">
+      <default>4</default>
+      <range min="2" max="9"/>
+      <summary>Virtual workspaces per monitor</summary>
+      <description>How many independent workspaces each monitor cycles through.</description>
+    </key>
+
+    <key name="switch-1" type="as">
+      <default><![CDATA[['<Super><Control>1']]]></default>
+      <summary>Switch the active monitor to workspace 1</summary>
+      <description></description>
+    </key>
+    <key name="switch-2" type="as">
+      <default><![CDATA[['<Super><Control>2']]]></default>
+      <summary>Switch the active monitor to workspace 2</summary>
+      <description></description>
+    </key>
+    <key name="switch-3" type="as">
+      <default><![CDATA[['<Super><Control>3']]]></default>
+      <summary>Switch the active monitor to workspace 3</summary>
+      <description></description>
+    </key>
+    <key name="switch-4" type="as">
+      <default><![CDATA[['<Super><Control>4']]]></default>
+      <summary>Switch the active monitor to workspace 4</summary>
+      <description></description>
+    </key>
+
+    <key name="ws-next" type="as">
+      <default><![CDATA[['<Super><Control>Right']]]></default>
+      <summary>Next workspace on the active monitor</summary>
+      <description></description>
+    </key>
+    <key name="ws-prev" type="as">
+      <default><![CDATA[['<Super><Control>Left']]]></default>
+      <summary>Previous workspace on the active monitor</summary>
+      <description></description>
+    </key>
+
+  </schema>
+</schemalist>

@@ -1,0 +1,9 @@
+{
+  "uuid": "panespace@MoriartyPuth.github.io",
+  "name": "Panespace",
+  "description": "Independent per-monitor workspaces. Each monitor keeps its own set of virtual workspaces, so switching on one screen leaves the others untouched. Simulated via per-window show/hide since GNOME has no native per-monitor workspaces.",
+  "shell-version": ["50"],
+  "settings-schema": "org.gnome.shell.extensions.panespace",
+  "url": "https://github.com/MoriartyPuth/panespace",
+  "version-name": "0.1.0"
+}
