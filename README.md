@@ -8,16 +8,20 @@ macOS-style "separate Spaces per display" behaviour GNOME lacks.
 
 ## Why it's "simulated"
 
-Mutter has a single global workspace list shared by every monitor; there is no
-native per-monitor workspace primitive (still only a draft Mutter MR). Panespace
-commandeers two real workspaces — a **stage** (visible) and a **park** (hidden
-holding pen) — pins the shell to the stage, and tags every window with a
-per-monitor virtual-desktop index. Switching a monitor moves only *that
-monitor's* windows between stage and park, which reads as independent desktops.
+Mutter has a single global *active* workspace shared by every monitor; there is
+no native per-monitor workspace primitive (still only a draft Mutter MR). Moving
+a window between real workspaces drags the global active workspace — and thus
+every monitor — along, so real workspaces can never be independent per screen.
 
-Because of this, Panespace shows its desktops through its **own top-bar
-indicator**, not GNOME's Activities overview (which is hardwired to the single
-global list).
+The only mechanism that is strictly per-window and never global is **minimise**.
+So Panespace tags each window with a per-monitor virtual-desktop index and, when
+you switch a monitor, unminimises that desktop's windows and minimises the rest.
+Only that monitor's windows are touched; every other monitor is untouched.
+
+Two consequences: desktops show through Panespace's **own top-bar indicator**
+(not GNOME's Activities overview, which is hardwired to the global list), and a
+"hidden" desktop's windows sit **minimised** (so they appear in a dock's
+minimised list).
 
 ## Usage
 
@@ -36,19 +40,20 @@ Or use the **top-bar indicator**: it shows each monitor's `current/total`
 (● = primary, ○ = others). Click it to jump to any desktop or add a new one on a
 specific screen.
 
-## Known limitations (v0.2)
+## Known limitations
 
 - Desktops show in Panespace's own indicator/menu, **not** GNOME's Activities
   overview — that can't be made per-monitor.
-- Panespace takes over the workspace model while enabled (2 static real
-  workspaces); your previous `dynamic-workspaces` / `num-workspaces` are saved
-  and restored on disable.
+- Hiding is by **minimise**, so switching looks like windows minimising /
+  restoring (not a sliding desktop animation), and hidden windows appear in a
+  dock's minimised list. This is the price of true independence on GNOME — it's
+  the only per-window hide that doesn't move the global workspace.
 - Moving a window between monitors re-homes it to that monitor's active desktop
   on the next switch.
 
 ### Roadmap
 - Remember per-monitor desktop counts across sessions.
-- Optional click-drag thumbnails / gesture switching.
+- Explore a slide/fade transition on the minimise to feel more like switching.
 
 ## Build / install
 
