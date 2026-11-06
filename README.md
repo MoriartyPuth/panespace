@@ -1,45 +1,54 @@
 # Panespace
 
-Independent per-monitor workspaces for GNOME Shell.
+Independent per-monitor workspaces ("desktops") for GNOME Shell.
 
-Each monitor keeps its **own** set of virtual workspaces, so switching on one
-screen leaves the others untouched — the macOS-style behaviour GNOME lacks.
+Each monitor keeps its **own** set of desktops that you switch and grow
+independently — switching on one screen leaves the others untouched. The
+macOS-style "separate Spaces per display" behaviour GNOME lacks.
 
 ## Why it's "simulated"
 
-Mutter has a single global active workspace shared by every monitor; there is no
+Mutter has a single global workspace list shared by every monitor; there is no
 native per-monitor workspace primitive (still only a draft Mutter MR). Panespace
-fakes it: every normal window is tagged with a virtual-workspace index, and each
-monitor remembers which index it is currently showing. Switching a monitor only
-**minimises / unminimises the windows on that monitor**, giving the illusion of
-independent workspaces.
+commandeers two real workspaces — a **stage** (visible) and a **park** (hidden
+holding pen) — pins the shell to the stage, and tags every window with a
+per-monitor virtual-desktop index. Switching a monitor moves only *that
+monitor's* windows between stage and park, which reads as independent desktops.
+
+Because of this, Panespace shows its desktops through its **own top-bar
+indicator**, not GNOME's Activities overview (which is hardwired to the single
+global list).
 
 ## Usage
 
-Switching always targets the monitor your **pointer** is on.
+Keyboard shortcuts act on the monitor your **pointer** is over:
 
 | Shortcut | Action |
 |----------|--------|
-| `Super+Alt+1..4` | Jump active monitor to workspace 1–4 |
-| `Super+Ctrl+Right` | Next workspace on active monitor |
-| `Super+Ctrl+Left` | Previous workspace on active monitor |
+| `Super+Alt+1..4` | Jump that monitor to desktop 1–4 |
+| `Super+Ctrl+Right` | Next desktop on that monitor |
+| `Super+Ctrl+Left` | Previous desktop on that monitor |
+| `Super+Ctrl+Up` | **Add** a new desktop on that monitor |
 
 (`Super+Ctrl+1..9` is avoided — GNOME binds it to "open new window of app N".)
 
-Count of virtual workspaces is configurable in preferences (2–9).
+Or use the **top-bar indicator**: it shows each monitor's `current/total`
+(● = primary, ○ = others). Click it to jump to any desktop or add a new one on a
+specific screen.
 
-## Known limitations (v0.1)
+## Known limitations (v0.2)
 
-- Windows are hidden by **minimising**, so they still show in the Overview and
-  in a dock's minimised list.
-- Works best with a **single real GNOME workspace** (Panespace layers its own
-  switching on top; it does not replace native workspace switching).
-- Moving a window between monitors re-homes it to that monitor's active
-  workspace on the next switch.
+- Desktops show in Panespace's own indicator/menu, **not** GNOME's Activities
+  overview — that can't be made per-monitor.
+- Panespace takes over the workspace model while enabled (2 static real
+  workspaces); your previous `dynamic-workspaces` / `num-workspaces` are saved
+  and restored on disable.
+- Moving a window between monitors re-homes it to that monitor's active desktop
+  on the next switch.
 
 ### Roadmap
-- v0.2: hide via a dedicated "parking" workspace instead of minimise (cleaner
-  Overview + alt-tab), optional per-monitor indicator in the panel.
+- Remember per-monitor desktop counts across sessions.
+- Optional click-drag thumbnails / gesture switching.
 
 ## Build / install
 

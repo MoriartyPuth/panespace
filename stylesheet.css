@@ -1,0 +1,9 @@
+.panespace-indicator {
+    padding: 0 8px;
+    font-feature-settings: "tnum";
+}
+
+.panespace-header {
+    font-weight: bold;
+    opacity: 0.8;
+}
